@@ -3,16 +3,15 @@ const app = express();
 
 app.use(express.json());
 
-const taskRoutes = require("./routes/taskRoutes");
-const submissionRoutes = require("./routes/submissionRoutes");
+// Routes
+const authRoutes = require("./routes/authRoutes");
 
-app.use("/api/tasks", taskRoutes);
-app.use("/api/submissions", submissionRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("API Running");
 });
 
 app.listen(5000, () => {
-  console.log("Server started");
+  console.log("Server running on port 5000");
 });
