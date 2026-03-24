@@ -9,11 +9,12 @@ const submissionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Task"
   },
-  image: String,
+  image: String, // proof (URL later)
   status: {
     type: String,
+    enum: ["pending", "approved", "rejected"],
     default: "pending"
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("Submission", submissionSchema);
