@@ -82,3 +82,19 @@ exports.getLeaderboard = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// SCHOOL LEADERBOARD
+exports.getSchoolLeaderboard = async (req, res) => {
+  try {
+    const { school } = req.query;
+
+    const users = await User.find({ school })
+      .sort({ ecoPoints: -1 })
+      .select("-password");
+
+    res.json(users);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
