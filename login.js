@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://eco-platform.onrender.com/api";
 
 async function login() {
   const email = document.getElementById("email").value;
