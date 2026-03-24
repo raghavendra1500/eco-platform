@@ -1,5 +1,5 @@
 //Base URL + Token
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://eco-platform.onrender.com/api";
 
 // later after login you store token
 const token = localStorage.getItem("token");
