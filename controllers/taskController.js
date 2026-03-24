@@ -10,15 +10,25 @@ exports.getTasks = async (req, res) => {
   }
 };
 
-// CREATE TASK
+// CREATE TASK (Teacher/Admin)
 exports.createTask = async (req, res) => {
   try {
-    const { title, description, points } = req.body;
+    const { title, description, points, category } = req.body;
 
-    const task = new Task({ title, description, points });
+    const task = new Task({
+      title,
+      description,
+      points,
+      category
+    });
+
     await task.save();
 
-    res.status(201).json(task);
+    res.status(201).json({
+      message: "Task created",
+      task
+    });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
