@@ -6,16 +6,21 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const login = async () => {
-    try {
-      const res = await API.post("/auth/login", { email, password });
+  try {
+    const res = await API.post("/auth/login", { email, password });
 
-      localStorage.setItem("token", res.data.token);
-      alert("Login success");
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("role", res.data.user.role);
 
+    if (res.data.user.role === "admin") {
+      window.location.href = "/admin";
+    } else {
       window.location.href = "/dashboard";
-    } catch (err) {
-      alert("Login failed");
     }
+
+  } catch {
+    alert("Login failed");
+  }
   };
 
   return (
