@@ -9,6 +9,9 @@ app.use(express.json());
 // Connect DB
 connectDB();
 
+const cors = require("cors");
+app.use(cors());
+
 // Routes
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
