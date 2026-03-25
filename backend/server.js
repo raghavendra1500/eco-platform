@@ -16,6 +16,7 @@ connectDB();
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/tasks", require("./routes/taskRoutes"));
+console.log("Auth routes loaded");
 app.use("/api/submissions", require("./routes/submissionRoutes"));
 
 // Test route
