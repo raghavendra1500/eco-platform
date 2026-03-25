@@ -24,6 +24,16 @@ exports.createSubmission = async (req, res) => {
   res.status(201).json({ message: "Task submitted" });
 };
 
+//submit task
+exports.submitTask = async (req, res) => {
+  try {
+    // logic here
+    res.json({ message: "Task submitted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 // APPROVE TASK (Teacher/Admin)
 exports.approveTask = async (req, res) => {
   try {
