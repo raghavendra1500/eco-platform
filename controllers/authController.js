@@ -64,16 +64,11 @@ exports.login = async (req, res) => {
 
 // GET LEADERBOARD
 exports.getLeaderboard = async (req, res) => {
-  try {
-    const users = await User.find()
-      .sort({ ecoPoints: -1 }) // descending
-      .select("-password");    // hide passwords
+  const users = await User.find()
+    .sort({ ecoPoints: -1 })
+    .select("name ecoPoints");
 
-    res.json(users);
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  res.json(users);
 };
 
 // SCHOOL LEADERBOARD
