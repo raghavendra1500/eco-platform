@@ -29,22 +29,29 @@ async function loadTasks() {
 
 // Submit Task
 async function submitTask(taskId) {
-  const image = "sample.jpg"; // later replace with upload
+  const token = localStorage.getItem("token");
 
-  await fetch(`${BASE_URL}/submissions`, {
+  const res = await fetch(`${BASE_URL}/submissions`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": token
+      Authorization: token
     },
     body: JSON.stringify({
       taskId,
-      image
+      image: "sample.jpg"
     })
   });
 
-  alert("Task submitted!");
+  const data = await res.json();
+
+  alert("🎉 Task submitted!");
+
+  // 🔄 Refresh data after submission
+  loadUser();
+  loadLeaderboard();
 }
+
 //Load Leaderboard
 async function loadLeaderboard() {
   const res = await fetch(`${BASE_URL}/auth/leaderboard`);
