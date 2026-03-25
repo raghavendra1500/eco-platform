@@ -4,6 +4,8 @@ const router = express.Router();
 // Import controller
 const authController = require("../controllers/authController");
 
+console.log("DEBUG authController:", authController);
+
 // Import middleware
 const { protect } = require("../middleware/authMiddleware");
 
