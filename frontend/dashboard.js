@@ -71,6 +71,24 @@ function loadUser() {
   // later you fetch from backend
   document.querySelector(".topbar h3").innerText = "Welcome, Student 👋";
 }
+
+// dashboard for real data
+async function loadUser() {
+  const res = await fetch(`${BASE_URL}/auth/me`, {
+    headers: {
+      "Authorization": localStorage.getItem("token")
+    }
+  });
+
+  const user = await res.json();
+
+  document.querySelector(".topbar h3").innerText =
+    `Welcome, ${user.name} 👋`;
+
+  document.querySelector(".topbar span").innerHTML =
+    `Eco Points: <strong>${user.ecoPoints}</strong>`;
+}
+
 //Run Everything
 loadUser();
 loadTasks();
