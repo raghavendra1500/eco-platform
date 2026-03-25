@@ -1,18 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
-// Import controller
 const authController = require("../controllers/authController");
+const authMiddleware = require("../middleware/authMiddleware");
 
-console.log("DEBUG authController:", authController);
-
-// Import middleware
-const { protect } = require("../middleware/authMiddleware");
+// DEBUG (REMOVE LATER)
+console.log("Controller:", authController);
+console.log("Middleware:", authMiddleware);
 
 // ROUTES
 router.post("/register", authController.register);
 router.post("/login", authController.login);
-router.get("/me", protect, authController.getMe);
+
+// ⚠️ IMPORTANT: use correct middleware reference
+router.get("/me", authMiddleware.protect, authController.getMe);
+
+// ⚠️ IMPORTANT: this must exist
 router.get("/leaderboard", authController.getLeaderboard);
 
 module.exports = router;
