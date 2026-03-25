@@ -14,23 +14,26 @@ export default function Signup() {
   };
 
   const signup = async () => {
+    console.log("Signup clicked", form); // 👈 DEBUG
+
     try {
-      await API.post("/auth/register", form);
+      const res = await API.post("/auth/register", form);
+      console.log(res.data);
+
       alert("Signup success");
       window.location.href = "/";
-    } catch {
-      alert("Error");
+    } catch (err) {
+      console.error(err); // 👈 IMPORTANT
+      alert("Signup failed");
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Signup 🌱</h2>
-
-      <input name="name" placeholder="Name" onChange={handleChange} /><br/><br/>
-      <input name="school" placeholder="School" onChange={handleChange} /><br/><br/>
-      <input name="email" placeholder="Email" onChange={handleChange} /><br/><br/>
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} /><br/><br/>
+    <div>
+      <input name="name" onChange={handleChange} placeholder="Name" />
+      <input name="school" onChange={handleChange} placeholder="School" />
+      <input name="email" onChange={handleChange} placeholder="Email" />
+      <input name="password" type="password" onChange={handleChange} placeholder="Password" />
 
       <button onClick={signup}>Signup</button>
     </div>
