@@ -36,11 +36,12 @@ exports.login = async (req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
   res.json({
-    token,
-    user: {
-      name: user.name,
-      ecoPoints: user.ecoPoints
-    }
+  token,
+  user: {
+    name: user.name,
+    ecoPoints: user.ecoPoints,
+    role: user.role
+  }
   });
 };
 
