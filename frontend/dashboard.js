@@ -54,7 +54,9 @@ async function loadLeaderboard() {
 
   container.innerHTML = "<h2>Top Students 🏆</h2>";
 
-  users.slice(0, 5).forEach((user, index) => {
+  const currentUserId = localStorage.getItem("userId");
+
+  users.forEach((user, index) => {
     const div = document.createElement("div");
     div.classList.add("leader");
 
