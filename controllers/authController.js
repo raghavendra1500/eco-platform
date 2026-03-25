@@ -62,6 +62,16 @@ exports.login = async (req, res) => {
   });
 };
 
+// dashboard for real data
+exports.getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 // GET LEADERBOARD
 exports.getLeaderboard = async (req, res) => {
   const users = await User.find()
@@ -84,15 +94,5 @@ exports.getSchoolLeaderboard = async (req, res) => {
 
   } catch (err) {
     res.status(500).json({ error: err.message });
-  }
-};
-
-// dashboard for real data
-exports.getMe = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ message: "Server error" });
   }
 };
