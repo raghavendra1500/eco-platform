@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import Navbar from "../components/Navbar";
+
+<Navbar />
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
