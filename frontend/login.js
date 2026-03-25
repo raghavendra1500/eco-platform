@@ -19,7 +19,7 @@ async function login() {
 
   if (data.token) {
     // Store token
-    localStorage.setItem("token", data.token);
+    localStorage.setItem("userId", data.user._id);
 
     alert("Login successful!");
 
