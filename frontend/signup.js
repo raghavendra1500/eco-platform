@@ -1,6 +1,8 @@
 const BASE_URL = "https://eco-platform.onrender.com/api";
 
 async function signup() {
+  console.log("Signup clicked");
+  
   const name = document.getElementById("name").value;
   const school = document.getElementById("school").value;
   const email = document.getElementById("email").value;
@@ -21,6 +23,7 @@ async function signup() {
 
   const data = await res.json();
 
+  console.log(data);
   alert(data.message);
 
   if (res.status === 201) {
