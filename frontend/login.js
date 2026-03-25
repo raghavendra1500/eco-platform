@@ -18,14 +18,13 @@ async function login() {
   const data = await res.json();
 
   if (data.token) {
-    // Store token
-    localStorage.setItem("userId", data.user._id);
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("userId", data.user._id);
+  localStorage.setItem("userName", data.user.name);
 
-    alert("Login successful!");
-
-    // Redirect to dashboard
-    window.location.href = "dashboard.html";
-  } else {
+  window.location.href = "dashboard.html";
+  }
+  else {
     alert(data.message);
   }
 }
