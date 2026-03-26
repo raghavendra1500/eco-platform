@@ -13,6 +13,7 @@ const { protect } = require("../middleware/authMiddleware");
 // USER
 router.post("/", protect, submitTask);
 
+router.put("/edit/:id", protect, updateSubmission);
 // ADMIN
 router.get("/", getAllSubmissions);
 router.put("/approve/:id", approveSubmission);
