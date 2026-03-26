@@ -55,7 +55,6 @@ exports.rejectSubmission = async (req, res) => {
 
 
 const cloudinary = require("../config/cloudinary");
-const Submission = require("../models/Submission");
 
 // USER SUBMIT WITH IMAGE
 exports.submitTask = async (req, res) => {
