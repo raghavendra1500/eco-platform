@@ -29,6 +29,14 @@ exports.submitTask = async (req, res) => {
   res.json(submission);
 };
 
+// TO MAKE SURE THAT USER CAN SUBMIT ONLY ONCE
+exports.getMySubmissions = async (req, res) => {
+  const submissions = await Submission.find({ user: req.user.id })
+    .populate("task"); 
+
+  res.json(submissions);
+};
+
 // ADMIN: GET ALL SUBMISSIONS
 exports.getAllSubmissions = async (req, res) => {
   const submissions = await Submission.find()
