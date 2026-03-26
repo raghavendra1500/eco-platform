@@ -62,6 +62,12 @@ exports.submitTask = async (req, res) => {
   try {
     const { taskId, image } = req.body;
 
+    if (!image) {
+      return res.status(400).json({ message: "Image is required" });
+    }
+
+    console.log("Uploading image...");
+
     // Upload to Cloudinary
     const upload = await cloudinary.uploader.upload(image, {
       folder: "eco-platform"
@@ -73,10 +79,13 @@ exports.submitTask = async (req, res) => {
       proof: upload.secure_url
     });
 
-    res.json(submission);
+    res.json({
+      message: "Submission successful",
+      submission
+    });
 
   } catch (err) {
-    console.log(err);
+    console.error("Upload error:", err);
     res.status(500).json({ error: "Upload failed" });
   }
 };
