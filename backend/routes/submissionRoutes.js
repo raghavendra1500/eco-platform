@@ -1,23 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const protect = require("../middleware/authMiddleware");
 
 const {
   submitTask,
   updateSubmission,
-  getAllSubmissions,
-  approveSubmission,
-  rejectSubmission
+  getMySubmissions
 } = require("../controllers/submissionController");
-
-const { protect } = require("../middleware/authMiddleware");
 
 // USER
 router.post("/", protect, submitTask);
-
 router.put("/edit/:id", protect, updateSubmission);
-// ADMIN
-router.get("/", getAllSubmissions);
-router.put("/approve/:id", approveSubmission);
-router.put("/reject/:id", rejectSubmission);
+router.get("/my", protect, getMySubmissions);
 
 module.exports = router;
