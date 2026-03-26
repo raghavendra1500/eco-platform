@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
   submitTask,
+  updateSubmission,
   getAllSubmissions,
   approveSubmission,
   rejectSubmission
