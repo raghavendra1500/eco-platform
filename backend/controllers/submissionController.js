@@ -2,10 +2,24 @@ const Submission = require("../models/Submission");
 const User = require("../models/User");
 const Task = require("../models/Task");
 
+
+
 // USER SUBMIT
 exports.submitTask = async (req, res) => {
   const { taskId, proof } = req.body;
+  
+  // CHECK IF ALREADY SUBMITTED
+    const existing = await Submission.findOne({
+      user: req.user.id,
+      task: taskId
+    });
 
+    if (existing) {
+      return res.status(400).json({
+        message: "You already submitted this task"
+      });
+    }
+  
   const submission = await Submission.create({
     user: req.user.id,
     task: taskId,
@@ -52,6 +66,27 @@ exports.rejectSubmission = async (req, res) => {
   res.json({ message: "Rejected" });
 };
 
+// EDIT SUBMISSION
+exports.updateSubmission = async (req, res) => {
+  try {
+    const { image } = req.body;
+
+    const upload = await cloudinary.uploader.upload(image, {
+      folder: "eco-platform"
+    });
+
+    const submission = await Submission.findByIdAndUpdate(
+      req.params.id,
+      { proof: upload.secure_url, status: "pending" },
+      { new: true }
+    );
+
+    res.json(submission);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 
 const cloudinary = require("../config/cloudinary");
