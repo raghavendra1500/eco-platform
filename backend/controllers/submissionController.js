@@ -90,3 +90,17 @@ exports.getMySubmissions = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// ✅ ADMIN: GET ALL SUBMISSIONS
+exports.getAllSubmissions = async (req, res) => {
+  try {
+    const submissions = await Submission.find()
+      .populate("user", "name")
+      .populate("task", "title points");
+
+    res.json(submissions);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
