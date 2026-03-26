@@ -108,28 +108,26 @@ export default function Dashboard() {
 
               {/* UI LOGIC */}
               {submission ? (
-                <>
-                  <p>
-                    Status:{" "}
-                    <b>
-                      {submission.status === "pending" && "⏳ Pending"}
-                      {submission.status === "approved" && "✅ Approved"}
-                      {submission.status === "rejected" && "❌ Rejected"}
-                    </b>
-                  </p>
-
-                  {/* 🔥 BONUS: disable edit if approved */}
-                  {submission.status !== "approved" && (
-                    <button onClick={() => editTask(submission._id)}>
-                      Edit Submission
-                    </button>
-                  )}
-                </>
-              ) : (
-                <button onClick={() => submitTask(task._id)}>
-                  Submit Task
+              <>
+                <p>
+                  Status:{" "}
+                  {submission.status === "pending" && "⏳ Pending"}
+                  {submission.status === "approved" && "✅ Approved"}
+                  {submission.status === "rejected" && "❌ Rejected"}
+                </p>
+              
+                {/* ❌ Disable edit if approved */}
+                {submission.status !== "approved" && (
+                <button onClick={() => editTask(submission._id)}>
+                    Edit Submission
                 </button>
-              )}
+                )}
+              </>
+            ) : (
+              <button onClick={() => submitTask(task._id)}>
+                Submit Task
+              </button>
+            )}
             </div>
           );
         })}
